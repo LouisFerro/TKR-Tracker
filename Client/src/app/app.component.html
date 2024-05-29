@@ -1,0 +1,23 @@
+<div class="flex-container">
+  <header><h1>{{title}}</h1></header>
+  <mat-toolbar>
+    <mat-toolbar-row>
+    <nav>
+      <button mat-raised-button color="primary"  routerLink="/map">map</button>
+      <button mat-raised-button color="primary"  routerLink="/tracker"
+              [disabled]="!userService.isLoggedIn()">tracker</button>
+      <button mat-raised-button color="primary" (click)="userService.logout()" >logout</button>
+    </nav>
+  </mat-toolbar-row>
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!userService.isLoggedIn()">
+  <h2>login</h2>
+  <app-login (loggedIn)="loggedIn($event)"></app-login>
+  <h2>register</h2>
+  <app-register (registered)="registered($event)"></app-register>
+</div>
+
+<footer class="footer"><app-messages></app-messages></footer>

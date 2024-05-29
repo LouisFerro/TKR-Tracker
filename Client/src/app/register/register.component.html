@@ -1,0 +1,35 @@
+<form #registerForm="ngForm" (ngSubmit)="onRegister()" appIdentityEmail appIdentityPwd>
+  <mat-form-field appearance="fill" subscriptSizing="dynamic">
+    <mat-hint align="start">min length 6</mat-hint>
+    <mat-error>username should be at least 6 characters long</mat-error>
+    <input matInput type="text" [(ngModel)]="username" name="username" placeholder="Username" required minlength="6"/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-hint>min length 7</mat-hint>
+    <mat-error>password should be at least 7 characters long</mat-error>
+    <input matInput type="password" [(ngModel)]="password" name="password" placeholder="Password" required  minlength="7"/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-hint>enter password again</mat-hint>
+    <mat-error>password should be the same as above</mat-error>
+    <input matInput type="password" [(ngModel)]="password2" name="password2" placeholder="Password" required/>
+    <div *ngIf="registerForm.errors?.['identityPwd'] && (registerForm.touched || registerForm.dirty)" class="cross-validation-error-message alert">
+      Password and Password2 have to be identical!!!
+    </div>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-hint>enter your email address</mat-hint>
+    <mat-error>enter a valid email address</mat-error>
+    <input matInput type="text" [(ngModel)]="email" name="email" placeholder="Email" required appRegexName="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-hint>enter your email address again</mat-hint>
+    <mat-error>email address should be the same as above</mat-error>
+    <input matInput type="text" [(ngModel)]="email2" name="email2" placeholder="Email" required/>
+    <div *ngIf="registerForm.errors?.['identityEmail'] && (registerForm.touched || registerForm.dirty)" class="cross-validation-error-message alert">
+      Email and Email2 have to identical!!!
+    </div>
+  </mat-form-field>
+  <button mat-raised-button color="warn" type="submit" [disabled]="!registerForm.form.valid">Register</button>
+  <button mat-raised-button color="accent" >Cancel</button>
+</form>
