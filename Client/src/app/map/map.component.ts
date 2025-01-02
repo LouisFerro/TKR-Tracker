@@ -10,7 +10,7 @@ import * as L from 'leaflet';
 })
 
 export class MapComponent implements AfterViewInit {
-  private map: L.Map | undefined;
+  private map: any;
 
   ngAfterViewInit(): void {
     this.initMap();

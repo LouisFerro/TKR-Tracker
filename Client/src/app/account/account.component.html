@@ -1,0 +1,45 @@
+<form #authenticationDataForm="ngForm" [formGroup]="authenticationData" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Username:</mat-label>
+    <input matInput type="text" formControlName="username">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email:</mat-label>
+    <input matInput type="text" formControlName="email">
+  </mat-form-field>
+</form>
+
+<form #personalDataForm="ngForm" [formGroup]="personalData">
+  <mat-form-field appearance="fill">
+    <mat-label>Firstname:</mat-label>
+    <input matInput type="text" formControlName="firstname">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Lastname:</mat-label>
+    <input matInput type="text" formControlName="lastname">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Sex:</mat-label>
+    <input matInput type="text" formControlName="sex">
+  </mat-form-field>
+</form>
+
+<form #addressDataForm="ngForm" [formGroup]="addressData" (ngSubmit)="onSubmit()">
+  <mat-form-field appearance="fill">
+    <mat-label>Street:</mat-label>
+    <input matInput type="text" formControlName="street">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Postal Code:</mat-label>
+    <input matInput type="text" formControlName="postal_code">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>City:</mat-label>
+    <input matInput type="text" formControlName="city">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Country:</mat-label>
+    <input matInput id="name" type="text" formControlName="country">
+  </mat-form-field>
+  <button mat-raised-button color="warn" type="submit" [disabled]="!authenticationDataForm.valid||!personalDataForm.valid||!addressDataForm.valid">Submit</button>
+</form>

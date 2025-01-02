@@ -6,6 +6,8 @@ import {Observable, of} from "rxjs";
   providedIn: 'root'
 })
 export class ConfigService {
+  public serverUrl: string = "https://127.0.0.1:3000";
+
   constructor(private messageService:MessageService) { }
   log(message: string) {
     this.messageService.add(`${message}`);

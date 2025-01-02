@@ -20,45 +20,71 @@ export class UserService {
     }
     else console.log("------------ userservice constructed!!!")
   }
-  isLoggedIn() : boolean {
-    console.log(this.user.username + "is logged in: " + this.user.isLoggedIn)
+
+  isLoggedIn () : boolean {
+    const session: string = sessionStorage.getItem('session') ?? "";
+
+    if(session != "") {
+      this.user.username = session;
+      this.user.isLoggedIn = true;
+    }
+
+    console.log(this.user.username + " is logged in: " + this.user.isLoggedIn);
+
     return this.user.isLoggedIn;
   }
-  isAdmin() : boolean {
+
+  isAdmin () : boolean {
     console.log(this.user.username + "is admin: " + this.user.isAdmin)
     return this.user.isAdmin == true;
   }
-  login(username:string, password:string):Observable<User>{
+
+  login (username:string, password:string):Observable<User>{
     this.user.username = username;
     this.user.password = password;
-    return this.http.post<User>("http://localhost:3000/users/login/",this.user)
+
+    sessionStorage.setItem('session', this.user.username);
+    localStorage.setItem('username', this.user.username);
+    return this.http.post<User>(this.configService.serverUrl + "/users/login/",this.user)
       .pipe(catchError(this.configService.handleError<User>('login',undefined)),
-        tap((x) =>
+        tap((user) =>
         {
-          if (x != null)
-          {
-            this.user = x;
+          if (user != null) {
+            this.user = user;
             this.user.isLoggedIn = true;
+            sessionStorage.setItem('user', JSON.stringify(this.user));
             console.log("+++++ " + JSON.stringify(this.user));
           }
         }));
   }
-  register(username:string, password:string, email:string):Observable<number>{
+
+  register (username:string, password:string, email:string):Observable<number>{
     this.user.username = username;
     this.user.password = password;
     this.user.email = email;
+
     console.log("service register ::: " + JSON.stringify(this.user));
-    let obs:Observable<number> = this.http.post<number>("http://localhost:3000/users/register/",this.user)
+
+    let obs:Observable<number> = this.http.post<number>(this.configService.serverUrl + "/users/register/",this.user)
       .pipe(catchError(this.configService.handleError<number>('register',-1)));
     return obs;
   }
-  update() : void {
+
+  update(user: User): Observable<void> {
+    this.user = user;
     console.log("service update user ::: " + JSON.stringify(this.user));
-    this.http.put<User>("http://localhost:3000/users/update/",this.user)
-      .pipe(catchError(this.configService.handleError<void>("update")))
-      .subscribe(() => {});
+    return this.http.put<void>(this.configService.serverUrl + "/users/update/", this.user)
+      .pipe(
+        catchError(this.configService.handleError<void>("update")),
+        tap(() => {
+          sessionStorage.setItem('user', JSON.stringify(this.user));
+        })
+      );
   }
-  logout():void{
+
+  logout ():void{
+    sessionStorage.clear();
+
     this.user = new User();
     this.router.navigate(['/']).then();
   }

@@ -10,7 +10,7 @@ export const loggedInGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  let res:boolean = inject(UserService).isLoggedIn() && !inject(UserService).isAdmin();
-  console.log("shop guard: " + res);
-  return res;
+  let result:boolean = inject(UserService).isLoggedIn() && !inject(UserService).isAdmin();
+  console.log("shop guard: " + result);
+  return result;
 };

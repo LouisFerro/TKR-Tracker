@@ -21,15 +21,15 @@ import {User} from "../_model/user";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  username : string = "";
+  username : string = localStorage.getItem('username') ?? "";
   password : string = "";
   constructor(private userService:UserService, private messageService:MessageService, private router:Router) {
   }
-  @Output() loggedIn    = new EventEmitter<User>();
+
+  @Output() loggedIn = new EventEmitter<User>();
   onLogin():void{
     this.userService.login(this.username, this.password)
-      .subscribe((x) =>
-      {
+      .subscribe((x) => {
         if (x == undefined) this.username = this.password = "";
         else{
           this.loggedIn.emit(x);

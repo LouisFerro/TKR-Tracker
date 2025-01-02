@@ -1,12 +1,16 @@
 <div class="flex-container">
-  <header><h1>{{title}}</h1></header>
+  <header><h1>Welcome back {{localStorage.getItem('username')}} to {{title}}</h1></header>
   <mat-toolbar>
     <mat-toolbar-row>
     <nav>
-      <button mat-raised-button color="primary"  routerLink="/map">map</button>
+      <button mat-raised-button color="primary"  routerLink="/map">Map</button>
       <button mat-raised-button color="primary"  routerLink="/tracker"
-              [disabled]="!userService.isLoggedIn()">tracker</button>
-      <button mat-raised-button color="primary" (click)="userService.logout()" >logout</button>
+              [disabled]="!userService.isLoggedIn()">Tracker</button>
+      <button mat-raised-button color="primary"  routerLink="/list"
+              [disabled]="!userService.isLoggedIn()">List</button>
+      <button mat-raised-button color="primary"  routerLink="/account"
+              [disabled]="!userService.isLoggedIn()">Account</button>
+      <button mat-raised-button color="primary" (click)="userService.logout()" >Logout</button>
     </nav>
   </mat-toolbar-row>
   </mat-toolbar>
