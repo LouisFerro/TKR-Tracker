@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from "./app.component";
-import { MapComponent } from "./map/map.component";
-import { TrackerComponent } from "./tracker/tracker.component";
-import { ListComponent } from "./list/list.component";
-import { loggedInGuard } from "./_guards/logged-in.guard";
-import {AccountComponent} from './account/account.component';
+import { MapComponent } from "./components/map/map.component";
+import { TrackerComponent } from "./components/tracker/tracker.component";
+import { ListComponent } from "./components/list/list.component";
+import { loggedInGuard } from "./guards/logged-in.guard";
+import {AccountComponent} from './components/account/account.component';
 
 export const routes: Routes = [
   {path: 'map', component: MapComponent},

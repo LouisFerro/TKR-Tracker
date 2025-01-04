@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MessageService} from "../_services/message.service";
+import {MessageService} from "../../services/message.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 

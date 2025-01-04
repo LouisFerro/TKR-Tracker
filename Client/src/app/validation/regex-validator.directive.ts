@@ -23,7 +23,6 @@ export class RegexValidatorDirective implements Validator {
 
   validate(control: AbstractControl): ValidationErrors | null {
     let res = this.name ? regexValidator(new RegExp(this.name, 'i'))(control) : null;
-    console.log("val2: " + this.name + " --- " + res);
     return res;
   }
 }

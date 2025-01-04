@@ -1,7 +1,7 @@
 import {Injectable, Optional, SkipSelf} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import {catchError, Observable, of, tap} from "rxjs";
-import {User} from "../_model/user";
+import {User} from "../model/user";
 import {MessageService} from "./message.service";
 import {ConfigService} from "./config.service";
 import {Router} from "@angular/router";
@@ -15,14 +15,14 @@ export class UserService {
               private configService:ConfigService, private router:Router,
               @Optional() @SkipSelf() sharedService?:UserService) {
     if (sharedService){
-      throw new Error("UserService already loaded");
-      console.log("------------ userservice already loaded!!!")
+      throw new Error("UserService already loaded.");
+      console.log("UserService already loaded.")
     }
-    else console.log("------------ userservice constructed!!!")
+    else console.log("UserService constructed.")
   }
 
   isLoggedIn () : boolean {
-    const session: string = sessionStorage.getItem('session') ?? "";
+    const session: string = sessionStorage.getItem('user') ?? "";
 
     if(session != "") {
       this.user.username = session;
@@ -42,9 +42,7 @@ export class UserService {
   login (username:string, password:string):Observable<User>{
     this.user.username = username;
     this.user.password = password;
-
-    sessionStorage.setItem('session', this.user.username);
-    localStorage.setItem('username', this.user.username);
+    sessionStorage.setItem('user', JSON.stringify(this.user));
     return this.http.post<User>(this.configService.serverUrl + "/users/login/",this.user)
       .pipe(catchError(this.configService.handleError<User>('login',undefined)),
         tap((user) =>

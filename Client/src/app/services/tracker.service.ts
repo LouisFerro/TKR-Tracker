@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { ConfigService } from "./config.service";
 
-import { Location } from "../_model/location";
+import { Location } from "../model/location";
 
 @Injectable({
   providedIn: 'root'

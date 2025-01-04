@@ -6,13 +6,13 @@ import { MatChipsModule } from "@angular/material/chips";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 
-import { User } from "./_model/user";
-import { UserService } from "./_services/user.service";
-import { MessageService } from "./_services/message.service";
+import { User } from "./model/user";
+import { UserService } from "./services/user.service";
+import { MessageService } from "./services/message.service";
 
-import { MessagesComponent } from "./messages/messages.component";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./register/register.component";
+import { MessagesComponent } from "./components/messages/messages.component";
+import { LoginComponent } from "./components/login/login.component";
+import { RegisterComponent } from "./components/register/register.component";
 import {ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -25,7 +25,7 @@ import {ReactiveFormsModule} from '@angular/forms';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  protected readonly localStorage = localStorage;
+  username = JSON.parse(sessionStorage.getItem('user') ?? "{}").username ?? "";
   title = "Shenk's Tracker";
 
   constructor(public userService:UserService,

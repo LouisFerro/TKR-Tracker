@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {UserService} from "../_services/user.service";
-import {MessageService} from "../_services/message.service";
+import {UserService} from "../../services/user.service";
+import {MessageService} from "../../services/message.service";
 import {NgIf} from "@angular/common";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
-import {IdentityEmailValidatorDirective} from "../_validation/identity-email-validator.directive";
-import {IdentityPwdValidatorDirective} from "../_validation/identity-pwd-validator.directive";
-import {RegexValidatorDirective} from "../_validation/regex-validator.directive";
+import {IdentityEmailValidatorDirective} from "../../validation/identity-email-validator.directive";
+import {IdentityPwdValidatorDirective} from "../../validation/identity-pwd-validator.directive";
+import {RegexValidatorDirective} from "../../validation/regex-validator.directive";
 
 @Component({
   selector: 'app-register',

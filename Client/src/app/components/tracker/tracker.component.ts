@@ -4,10 +4,10 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 import * as L from "leaflet";
 import {take} from "rxjs";
 
-import { TrackerService } from "../_services/tracker.service";
-import { UserService } from "../_services/user.service";
-import { Location } from "../_model/location";
-import { User } from "../_model/user";
+import { TrackerService } from "../../services/tracker.service";
+import { UserService } from "../../services/user.service";
+import { Location } from "../../model/location";
+import { User } from "../../model/user";
 
 @Component({
   selector: 'app-tracker',

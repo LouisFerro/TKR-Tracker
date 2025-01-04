@@ -3,11 +3,11 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
-import {UserService} from '../_services/user.service';
-import {MessageService} from '../_services/message.service';
+import {UserService} from '../../services/user.service';
+import {MessageService} from '../../services/message.service';
 import {Router} from '@angular/router';
 
-import {User} from '../_model/user';
+import {User} from '../../model/user';
 
 @Component({
   selector: 'app-account',
