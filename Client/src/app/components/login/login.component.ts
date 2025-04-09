@@ -23,16 +23,15 @@ import {User} from "../../model/user";
 export class LoginComponent {
   username = JSON.parse(sessionStorage.getItem('user') ?? "{}").username ?? "";
   password = "";
-  constructor(private userService:UserService, private messageService:MessageService, private router:Router) {
-  }
+  constructor(private userService: UserService, private messageService: MessageService, private router: Router) {}
 
   @Output() loggedIn = new EventEmitter<User>();
   onLogin():void{
     this.userService.login(this.username, this.password)
-      .subscribe((x) => {
-        if (x == undefined) this.username = this.password = "";
+      .subscribe((response) => {
+        if (response == undefined) this.username = this.password = "";
         else{
-          this.loggedIn.emit(x);
+          this.loggedIn.emit(response.user);
         }
       })
   }

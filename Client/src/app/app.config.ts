@@ -8,15 +8,24 @@ import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy, PathLocationStrat
 import {UserService} from "./services/user.service";
 import { provideServiceWorker } from '@angular/service-worker';
 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes /*, withDebugTracing()*/),
-    importProvidersFrom(HttpClientModule)
-    //    ,{provide : UserService}
-    ,
+  providers: [
+    provideRouter(routes /*, withDebugTracing()*/),
+    importProvidersFrom(HttpClientModule),
     provideAnimations(),
     { provide: LocationStrategy, useClass: PathLocationStrategy },
-    { provide: APP_BASE_HREF, useValue: '/' }, provideServiceWorker('ngsw-worker.js', {
-        enabled: !isDevMode(),
-        registrationStrategy: 'registerWhenStable:30000'
-    })]
+    { provide: APP_BASE_HREF, useValue: '/' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000'
+    })
+  ]
 };

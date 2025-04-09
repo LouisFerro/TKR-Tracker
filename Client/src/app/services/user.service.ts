@@ -39,21 +39,27 @@ export class UserService {
     return this.user.isAdmin == true;
   }
 
-  login (username:string, password:string):Observable<User>{
+  login(username: string, password: string): Observable<{ user: User, token: string }> {
     this.user.username = username;
     this.user.password = password;
     sessionStorage.setItem('user', JSON.stringify(this.user));
-    return this.http.post<User>(this.configService.serverUrl + "/users/login/",this.user)
-      .pipe(catchError(this.configService.handleError<User>('login',undefined)),
-        tap((user) =>
-        {
-          if (user != null) {
-            this.user = user;
+
+    return this.http.post<{ user: User, token: string }>(this.configService.serverUrl + "/users/login/", this.user)
+      .pipe(
+        catchError(this.configService.handleError<{ user: User, token: string }>('login', undefined)),
+        tap((response) => {
+          if (response && response.user && response.token) {
+            this.user = response.user;
             this.user.isLoggedIn = true;
             sessionStorage.setItem('user', JSON.stringify(this.user));
-            console.log("+++++ " + JSON.stringify(this.user));
+
+            sessionStorage.setItem('token', response.token);
+
+            console.log("+++++ User data: " + JSON.stringify(this.user));
+            console.log("+++++ Token: " + response.token);
           }
-        }));
+        })
+      );
   }
 
   register (username:string, password:string, email:string):Observable<number>{
