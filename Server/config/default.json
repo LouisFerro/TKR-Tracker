@@ -2,7 +2,7 @@
   "dbConfig" : {
     "host" : "localhost",
     "user" : "postgres",
-    "pwd" : "postgres",
+    "password" : "postgres",
     "database" : "Tracker",
     "connectionLimit" : 13
   },

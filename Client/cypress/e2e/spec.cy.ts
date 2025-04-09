@@ -14,8 +14,8 @@ describe('Main Page: ', () => {
 
   it('Ensure that Login Button is disabled, when incorrect Account Data is entered', () => {
     cy.visit('/');
-    cy.get('[data-testid="login#username"]').type('');
-    cy.get('[data-testid="login#password"]').type('');
+    cy.get('[data-testid="login#username"]');
+    cy.get('[data-testid="login#password"]');
     cy.get('[data-testid="login"]').should('be.disabled');
   });
 

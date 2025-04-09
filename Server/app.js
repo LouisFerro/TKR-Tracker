@@ -30,7 +30,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const config_1 = __importDefault(require("config"));
 const swagger_1 = require("./config/swagger");
-const router_1 = require("./router/router");
+const router_1 = require("./presentation/routers/router");
 const https = __importStar(require("node:https"));
 const fs = __importStar(require("node:fs"));
 const app = (0, express_1.default)();
@@ -43,8 +43,8 @@ app.use('/users', router_1.router);
 app.use(errorHandler);
 (0, swagger_1.setupSwagger)(app);
 const server = https.createServer({
-    key: fs.readFileSync('./mkcert/localhost+3-key.pem'),
-    cert: fs.readFileSync('./mkcert/localhost+3.pem'),
+    key: fs.readFileSync('./config/authentication/localhost+3-key.pem'),
+    cert: fs.readFileSync('./config/authentication/localhost+3.pem'),
 }, app);
 server.listen(port, "127.0.0.1", () => {
     console.log(`Example app listening on port ${port}`);

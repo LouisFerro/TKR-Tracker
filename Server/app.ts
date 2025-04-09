@@ -3,7 +3,7 @@ import cors from 'cors';
 import config from 'config';
 import { setupSwagger } from './config/swagger';
 
-import { router } from "./router/router";
+import { router } from "./presentation/routers/router";
 import * as https from "node:https";
 import * as fs from "node:fs";
 
@@ -22,8 +22,8 @@ app.use(errorHandler);
 setupSwagger(app);
 
 const server = https.createServer({
-    key: fs.readFileSync('./mkcert/localhost+3-key.pem'),
-    cert: fs.readFileSync('./mkcert/localhost+3.pem'),
+    key: fs.readFileSync('./config/authentication/localhost+3-key.pem'),
+    cert: fs.readFileSync('./config/authentication/localhost+3.pem'),
 }, app);
 
 server.listen(port, "127.0.0.1", () => {

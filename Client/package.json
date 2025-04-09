@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --configuration production --ssl true --ssl-key \"./mkcert/localhost+3-key.pem\" --ssl-cert \"./mkcert/localhost+3.pem\" --host 127.0.0.1 --port 4200",
+    "start": "ng serve --configuration production --ssl true --ssl-key \"configuration/authentication/localhost+3-key.pem\" --ssl-cert \"authentication/localhost+3.pem\" --host 127.0.0.1 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
